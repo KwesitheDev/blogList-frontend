@@ -21,6 +21,8 @@ const App = () => {
     e.preventDefault()
     try {
       const user = await loginService.login({ username, password }) 
+
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')

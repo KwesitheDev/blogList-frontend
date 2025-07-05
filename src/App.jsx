@@ -17,6 +17,22 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      blogService.setToken(user.token)
+      setUser(user)
+    }
+  }, [])
+
+  //handle logout 
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedBlogAppUser')
+    setUser(null)
+    blogService.setToken(null)
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault()
     try {

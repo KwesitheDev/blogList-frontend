@@ -1,4 +1,4 @@
-const blogForm = ({ handleSubmit, title, author, url, handleTitleChange, handleAuthorChange, handleUrlChange }) => {
+const BlogForm = ({ handleSubmit, title, author, url, handleTitleChange, handleAuthorChange, handleUrlChange }) => {
     return (
         <form onSubmit={handleSubmit}>
         <div>
@@ -33,4 +33,4 @@ const blogForm = ({ handleSubmit, title, author, url, handleTitleChange, handleA
     )
 }
 
-export default blogForm
+export default BlogForm

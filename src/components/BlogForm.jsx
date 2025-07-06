@@ -32,3 +32,5 @@ const blogForm = ({ handleSubmit, title, author, url, handleTitleChange, handleA
       </form>
     )
 }
+
+export default blogForm

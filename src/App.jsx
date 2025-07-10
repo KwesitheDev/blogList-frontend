@@ -83,6 +83,15 @@ const App = () => {
     )
   }
 
+  const handleDelete = async (id) => {
+  try {
+    await blogService.remove(id)
+    setBlogs(blogs.filter(blog => blog.id !== id))
+  } catch (exception) {
+    showNotification('Error deleting blog:'," error")
+  }
+}
+
   return (
     <div>
       <Notification notification={notification} />
@@ -94,9 +103,17 @@ const App = () => {
 
       <BlogForm addBlog={addBlog} />
 
-      {blogs.map(blog => (
-        <Blog key={blog.id} blog={blog} onLike = {handleLike} />
-      ))}
+      {blogs
+          .slice() 
+          .sort((a, b) => b.likes - a.likes)
+          .map(blog => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              onLike={handleLike}
+              user={user} 
+            />
+        ))}
     </div>
   )
 }

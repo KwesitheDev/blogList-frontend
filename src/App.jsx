@@ -63,6 +63,11 @@ const App = () => {
     }
   }
 
+  const handleLike = (updatedBlog) => {
+  setBlogs(blogs.map(blog => blog.id === updatedBlog.id ? updatedBlog : blog))
+}
+
+
   if (user === null) {
     return (
       <div>

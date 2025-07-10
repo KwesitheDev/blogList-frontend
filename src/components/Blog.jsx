@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import blogService from '../services/blogs'
-const Blog = ({ blog, onLike}) => {
+const Blog = ({ blog, onLike, onDelete, user}) => {
   const [showDetails, setShowDetails] = useState(false)
 
 
@@ -25,6 +25,15 @@ const Blog = ({ blog, onLike}) => {
     const returnedBlog = await blogService.update(blog.id, updatedBlog)
     onLike(returnedBlog)
   }
+
+  const handleDelete = () => {
+    if (window.confirm(`Delete blog "${blog.title}" by ${blog.author}?`)) {
+      onDelete(blog.id)
+    }
+  }
+
+  const isOwner = user && blog.user && (blog.user.username === user.username)
+
     
   return (
     <div style={blogStyle}>
@@ -42,6 +51,7 @@ const Blog = ({ blog, onLike}) => {
             likes {blog.likes} <button onClick={handleLike}>like</button>
           </div>
           <div>{blog.user?.name}</div>
+          {isOwner && <button onClick={handleDelete}>remove</button>}
         </div>
       )}
     </div>

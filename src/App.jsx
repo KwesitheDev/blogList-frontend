@@ -112,6 +112,7 @@ const App = () => {
               blog={blog}
               onLike={handleLike}
               user={user} 
+              onDelete={handleDelete}
             />
         ))}
     </div>

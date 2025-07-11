@@ -1,8 +1,7 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import blogService from '../services/blogs'
-const Blog = ({ blog, onLike, onDelete, user}) => {
+const Blog = ({ blog, onLike, onDelete, user }) => {
   const [showDetails, setShowDetails] = useState(false)
-
 
   const blogStyle = {
     paddingTop: 10,
@@ -12,11 +11,11 @@ const Blog = ({ blog, onLike, onDelete, user}) => {
     marginBottom: 5
   }
 
-  const toggleDetails = ()=> setShowDetails(!showDetails)
+  const toggleDetails = () => setShowDetails(!showDetails)
 
   const handleLike = async () => {
     const updatedBlog = {
-      user: blog.user.id || blog.user, 
+      user: blog.user.id || blog.user,
       likes: blog.likes + 1,
       author: blog.author,
       title: blog.title,
@@ -32,16 +31,13 @@ const Blog = ({ blog, onLike, onDelete, user}) => {
     }
   }
 
-  const isOwner = user && blog.user && (blog.user.username === user.username)
+  const isOwner = user && blog.user && blog.user.username === user.username
 
-    
   return (
     <div style={blogStyle}>
       <div>
         {blog.title} {blog.author}
-        <button onClick={toggleDetails}>
-          {showDetails ? 'hide' : 'view'}
-        </button>
+        <button onClick={toggleDetails}>{showDetails ? 'hide' : 'view'}</button>
       </div>
 
       {showDetails && (

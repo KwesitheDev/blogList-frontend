@@ -3,7 +3,7 @@ const Login = ({
   username,
   password,
   setUsername,
-  setPassword,
+  setPassword
 }) => {
   return (
     <div>
@@ -30,7 +30,7 @@ const Login = ({
         <button type="submit">login</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

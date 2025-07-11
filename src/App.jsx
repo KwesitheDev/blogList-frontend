@@ -14,7 +14,7 @@ const App = () => {
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-    blogService.getAll().then(blogs => setBlogs(blogs))
+    blogService.getAll().then((blogs) => setBlogs(blogs))
   }, [])
 
   useEffect(() => {
@@ -57,15 +57,17 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blogObject)
       setBlogs(blogs.concat(returnedBlog))
-      showNotification(`A new blog "${returnedBlog.title}" by ${returnedBlog.author} added`)
+      showNotification(
+        `A new blog "${returnedBlog.title}" by ${returnedBlog.author} added`
+      )
     } catch (exception) {
       showNotification('Failed to create blog', 'error')
     }
   }
 
-  const handleLike = (updatedBlog) => {
-  setBlogs(blogs.map(blog => blog.id === updatedBlog.id ? updatedBlog : blog))
-}
+const handleLike = (updatedBlog) => 
+  setBlogs(blogs.map((blog) => blog.id === updatedBlog.id ? updatedBlog : blog))
+  
 
 
   if (user === null) {
@@ -84,13 +86,13 @@ const App = () => {
   }
 
   const handleDelete = async (id) => {
-  try {
-    await blogService.remove(id)
-    setBlogs(blogs.filter(blog => blog.id !== id))
-  } catch (exception) {
-    showNotification('Error deleting blog:'," error")
+    try {
+      await blogService.remove(id)
+      setBlogs(blogs.filter((blog) => blog.id !== id))
+    } catch (exception) {
+      showNotification('Error deleting blog:', 'error')
+    }
   }
-}
 
   return (
     <div>
@@ -104,16 +106,16 @@ const App = () => {
       <BlogForm addBlog={addBlog} />
 
       {blogs
-          .slice() 
-          .sort((a, b) => b.likes - a.likes)
-          .map(blog => (
-            <Blog
-              key={blog.id}
-              blog={blog}
-              onLike={handleLike}
-              user={user} 
-              onDelete={handleDelete}
-            />
+        .slice()
+        .sort((a, b) => b.likes - a.likes)
+        .map(blog => (
+          <Blog
+            key={blog.id}
+            blog={blog}
+            onLike={handleLike}
+            user={user}
+            onDelete={handleDelete}
+          />
         ))}
     </div>
   )

@@ -47,3 +47,28 @@ test('shows url and likes when the view button is clicked', () => {
   expect(details).toHaveTextContent(`likes ${blog.likes}`)
 })
 //used fireEvent instead since i find that more efficient
+
+test('shows url and likes when the view button is clicked', () => {
+  const blog = {
+    title: 'Testing react Apps',
+    author: 'Kwesithedev',
+    url: 'somelink.com',
+    likes: 7,
+    user: {
+      username: 'test',
+      name: 'Test name'
+    }
+  }
+
+  const mockLikeHandler = vi.fn()
+  render(<Blog blog={blog} onLike={mockLikeHandler} />)
+
+  const button = screen.getByTestId('toggle-btn')
+  fireEvent.click(button)
+
+  const likeButton = screen.getByTestId('like-btn')
+  fireEvent.click(likeButton)
+  fireEvent.click(likeButton)
+
+  expect(mockLikeHandler).toHaveBeenCalled(2)
+})

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Blog from '../components/Blog'
-import { expect } from 'vitest'
+import { expect, test, vi} from 'vitest'
 
 test('renders blog title and author but not url or likes by default', () => {
   const blog = {

@@ -37,7 +37,9 @@ const Blog = ({ blog, onLike, onDelete, user }) => {
     <div style={blogStyle}>
       <div className="blog-title-author" data-testid="blog-title-author">
         {blog.title} {blog.author}
-        <button onClick={toggleDetails}>{showDetails ? 'hide' : 'view'}</button>
+        <button onClick={toggleDetails} data-testid="toggle-btn">
+          {showDetails ? 'hide' : 'view'}{' '}
+        </button>
       </div>
 
       {showDetails && (

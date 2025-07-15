@@ -9,7 +9,7 @@ describe('Blog app', () => {
 
     await request.post(`${baseUrl}/api/users`, {
       data: {
-        name: 'New USer',
+        name: 'New User',
         username: 'newUser',
         password: 'password'
       }
@@ -22,12 +22,25 @@ describe('Blog app', () => {
     await expect(page.getByTestId('login-form')).toBeVisible()
     await expect(page.getByTestId('username')).toBeVisible()
     await expect(page.getByTestId('password')).toBeVisible()
-    await expect(page.getByrole('button', { name: 'login' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'login' })).toBeVisible()
   })
 
   describe('Login', () => {
     test('Succeeds with right deatails', async ({ page }) => {
-      await page.getByTestId
+      await page.getByTestId('username').fill('newUser')
+      await page.getByTestId('password').fill('password')
+      await page.getByRole('button', { name: 'login' }).click()
+
+      await expect(page.locator('text=New User logged in')).toBeVisible()
+    })
+
+    test('Fails with wrong details', async ({ page }) => {
+      await page.getByTestId('username').fill('newUser')
+      await page.getByTestId('password').fill('NOTpassword')
+      await page.getByRole('button', { name: 'login' }).click()
+
+      await expect(page.getByText('wrong username or password')).toBeVisible()
+      await expect(page.locator('text=New User logged in')).not.toBeVisible()
     })
   })
 })

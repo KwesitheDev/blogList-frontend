@@ -8,7 +8,7 @@ const Login = ({
   return (
     <div>
       <h2>log in to application</h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} data-testid="login-form">
         <div>
           username
           <input
